@@ -17,7 +17,8 @@
                   <p class="mb-0">Enter email and password to sign in</p>
                 </div>
                 <div class="card-body">
-                  <form  method="POST">
+                  {% comment %} enctype="multipath/form-data" {% endcomment %}
+                  <form  method="POST"  enctype="multipart/form-data">  
                     {% csrf_token %}
                         <div class="mb-3">
                                   <div class="form-control form-control-lg" for="id_username">
@@ -30,10 +31,15 @@
                                       </div>
                         </div>
                         <div class="mb-3">
-                          <div class="form-control form-control-lg" for="id_email">
-                          {{form.userImage|as_crispy_field }}    
-                          </div>
+                                      <div class="form-control form-control-lg" for="id_userImage">
+                                      {{form.userImage|as_crispy_field }}    
+                                      </div>
                        </div>
+                       <div class="mb-3">
+                          <div class="form-control form-control-lg" for="id_userImage">
+                            {{form.role|as_crispy_field }}    
+                          </div>
+                        </div>
                         <div class="mb-3">
                                           <div class="form-control form-control-lg" for="id_password1">
                                               {{form.password1|as_crispy_field}}

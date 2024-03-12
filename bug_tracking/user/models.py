@@ -16,7 +16,7 @@ class User(AbstractUser):
     role = models.CharField(choices=ROLE_CHOICES,max_length=100,null=True,blank=True)
     is_manager = models.BooleanField(default = False)
     is_developer = models.BooleanField(default=False)
-    userImage = models.ImageField(upload_to='uploads/',null=True)
+    userImage = models.ImageField(upload_to='project/',null=True,blank=True)
     
     class Meta:
         db_table = 'user'        

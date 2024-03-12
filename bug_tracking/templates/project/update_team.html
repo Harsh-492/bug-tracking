@@ -15,8 +15,9 @@
     
     <center >
       <div class="mt-100">
-          <form method="post" style="border: solid;width: 30rem; background-color: white;margin: 250px;padding: 30px;justify-content: left;">
-            {% csrf_token %} {{form.as_p}}
+          <form method="POST" style="border: solid;width: 30rem; background-color: white;margin: 250px;padding: 30px;justify-content: left;">
+            {% csrf_token %}
+             {{form.as_p}}
             <input type="submit" value="Submit" class="btn btn-dark" />
           </form>
       </div>

@@ -19,7 +19,6 @@
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><h6>Module</h6></th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"><h6>Title</h6></th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"><h6>Priority</h6></th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"><h6>Description</h6></th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"><h6>Total Minutes</h6></th>
                   <th class="text-secondary opacity-7"><h6>ACTION</h6></th>
                 </tr>
@@ -46,11 +45,13 @@
                     
                   </td>
                   <td>
-                    <p class="text-xs font-weight-bold mb-0">{{task.priority}}</p>
-                    
-                  </td>
-                  <td>
-                    <p class="text-xs font-weight-bold mb-0">{{task.description}}</p>
+                    {% if task.priority == "High" %}
+                      <p class="text-xs font-weight-bold mb-0 btn btn-danger" style="height: 40px;width: 100px;padding: 12px;text-decoration-color: black;">{{task.priority}}</p>
+                      {% elif task.priority == "Medium" %} 
+                      <p class="text-xs font-weight-bold mb-0 btn btn-dark" style="height: 40px;width: 100px;padding: 12px;text-decoration-color: black;">{{task.priority}}</p>
+                      {% else %}
+                      <p class="text-xs font-weight-bold mb-0 btn btn-success" style="height: 40px;width: 100px;padding: 12px;text-decoration-color: black;">{{task.priority}}</p>
+                    {% endif %}
                     
                   </td>
                   <td>

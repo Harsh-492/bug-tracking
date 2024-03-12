@@ -21,7 +21,7 @@
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Start Date</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">End Date</th>
                   <th class="text-secondary opacity-7">ACTION</th>
-                  <th class="text-secondary opacity-7">Status</th>
+
                 </tr>
               </thead>
               <tbody>
@@ -33,15 +33,19 @@
                       {% comment %} <div>
                         <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
                       </div> {% endcomment %}
+                      <div>
+                        {% comment %} {{user.userImage}} {% endcomment %}
+                        {% comment %} {{project.projectimg}} {% endcomment %}
+                          <img src="{{project.projectimg.url}}" class="avatar avatar-sm me-3" alt="user1">
+                        </div> 
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-0 text-sm">{{project.name}}</h6>
-                        <p class="text-xs text-secondary mb-0">john@</p>
+                        <p class="text-xs text-secondary mb-0"></p>
                       </div>
                     </div>
                   </td>
                   <td>
                     <p class="text-xs font-weight-bold mb-0">{{project.technology}}</p>
-                    
                   </td>
                   <td class="align-middle text-center text-sm">
                     <span class="badge badge-sm bg-gradient-success" style="width: 80px;height: 30px;">{{project.estimated_hours}}</span>
@@ -62,9 +66,9 @@
                       <a href="{% url "project_delete" project.id %}" class="text-secondary font-weight-bold text-xs btn btn-danger" data-toggle="tooltip" data-original-title="Edit user">
                         DELETE
                       </a>
-                      {% comment %} <a href="{% url "update_team" project.id  %}" class="text-secondary font-weight-bold text-xs btn btn-danger" data-toggle="tooltip" data-original-title="Edit user">
+                       <a href="{% url "update_team" project.id   %}" class="text-secondary font-weight-bold text-xs btn btn-danger" data-toggle="tooltip" data-original-title="Edit user">
                         Create
-                      </a> {% endcomment %}
+                      </a> 
                    </td>
                    
                 </tr>

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import ProjectCreationView,ProjectListView,ProjectTeamCreateView,ProjectDeleteView,ProjectDetailView,ProjectUpdateView,ProjectModuleView,ProjectTaskView,ProjectModuleList,ProjectModuleUpdate,ProjectModuleDelete,ProjectTaskList,ProjectTaskUpdate,ProjectTaskDelete
+from .views import ProjectCreationView,ProjectListView,ProjectTeamCreateView,ProjectTeamUpdate,ProjectDeleteView,ProjectDetailView,ProjectUpdateView,ProjectModuleView,ProjectTaskView,ProjectModuleList,ProjectModuleUpdate,ProjectModuleDelete,ProjectTaskList,ProjectTaskUpdate,ProjectTaskDelete,ProjectReport
 
 urlpatterns = [
  
@@ -9,7 +9,7 @@ urlpatterns = [
  path("list/",ProjectListView.as_view(),name="project_list"),
 #  path("status/",ProjectStatusView.as_view(),name="project_status"),
  path("create_team/",ProjectTeamCreateView.as_view(),name="project_team_create"),
-#  path("update_team/<int:pk>",ProjectTeamUpdate.as_view(),name="update_team"),
+ path("<int:project_id>/update_team/",ProjectTeamUpdate.as_view(),name="update_team"),
 
  path("project_delete/<int:pk>",ProjectDeleteView.as_view(),name="project_delete"),
  path("project_detail/<int:pk>",ProjectDetailView.as_view(),name="project_detail"),
@@ -20,6 +20,7 @@ urlpatterns = [
  path("projectmoduleupdate/<int:pk>",ProjectModuleUpdate.as_view(),name="projectmoduleupdate"),
  path("projectmoduledelete/<int:pk>",ProjectModuleDelete.as_view(),name="projectmoduledelete"),
 
+ path('projectreport/<int:pk>',ProjectReport.as_view(),name='projectreport'),
 
 
  path('projecttask/',ProjectTaskView.as_view(),name='projecttask'),

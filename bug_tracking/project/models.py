@@ -18,7 +18,7 @@ class Project(models.Model):
     estimated_hours = models.PositiveIntegerField()
     startDate = models.DateField()
     endDate = models.DateField()
-    
+    projectimg = models.ImageField(upload_to= 'project/',null=True,blank=True)
     
     class Meta:
         db_table = "project"
@@ -29,14 +29,13 @@ class Project(models.Model):
 status_choices = (
     ("Started","Started"),
     ("Complted","Complted"),
-    ("Working","Working"),
-    ("Debuging","Debuging")
+    ("Processing","Processing"),
 )
 
 class ProjectTeam(models.Model):
-    project = models.ForeignKey(Project,on_delete=models.CASCADE)        
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    status = models.CharField(choices=status_choices,max_length=100,null=True)    
+    project = models.ForeignKey(Project,on_delete=models.CASCADE,blank=True)        
+    user = models.ForeignKey(User,on_delete=models.CASCADE,blank=True)
+    
     class Meta:
         db_table = "projectteam"
     
@@ -69,16 +68,17 @@ class Task(models.Model):
     priority = models.CharField(max_length=30)
     description = models.CharField(max_length=500)
     totalMinutes = models.IntegerField()
+    status = models.CharField(choices=status_choices,max_length=100,null=True,blank=True)
 
     class Meta:
         db_table = "Task"
+    
 
 class UserTask(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     task = models.ForeignKey(Task,on_delete=models.CASCADE)
 
-    
-
+   
 
 
 

@@ -6,14 +6,20 @@ from django.db import transaction
 class ManagerRegistrationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ['username','email','age','salary','userImage','password1','password2']
+        fields = ['username', 'email', 'age', 'salary','role', 'userImage', 'password1', 'password2']
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['userImage'].required = False
 
     @transaction.atomic
-    def save(self):
+    def save(self, commit=True):
         user = super().save(commit=False)
         user.is_manager = True
-        user.save()
+        if commit:
+            user.save()
         return user
+
     
 
 class DeveloperRegistrationForm(UserCreationForm):
