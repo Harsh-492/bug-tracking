@@ -19,7 +19,7 @@
           <div
             class="col-xl-5 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto"
           >
-            <div class="card card-plain" style="background-color: rgb(251, 251, 251); border-inline: solid 0.5px rgb(165, 165, 248);">
+            <div class="card card-plain" style="background-color: rgb(251, 251, 251); border-inline: solid 0.5px black;">
               <div class="card-header pb-0 text-start" >
                 <h4 class="font-weight-bolder">Sign In</h4>
                 <p class="mb-0">Enter your email and password to sign in</p>
@@ -28,7 +28,7 @@
                 <form role="form" method ="POST">
                   {% csrf_token %}
                     <div class="mb-3">
-                        <div class = "form-control form-control-lg">
+                        <div class = "form-control form-control-lg text-dark">
                         {{form.username|as_crispy_field}}
                         </div>
                       </div>
@@ -61,7 +61,7 @@
                     >
                       Sign in
                     </button> {% endcomment %}
-                    <input type = "submit" value ="LOGIN" class="btn btn-lg btn-primary btn-lg w-100 mt--1 mb-0">
+                    <input type = "submit" value ="LOGIN" class="btn btn-lg btn-dark btn-lg w-100 mt--1 mb-0">
                   </div>
                 </form>
               </div>
@@ -70,8 +70,8 @@
                   Don't have an account?
                   <a
                     href="{% url 'manager-register' %}"
-                    class="text-primary text-gradient font-weight-bold"
-                    >Sign up</a
+                    class="text-dark text-gradient font-weight-bold"
+                    >Register</a
                   >
                 </p>
               </div>
@@ -81,17 +81,17 @@
             class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column"
           >
             <div
-              class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
+              class="position-relative bg-gradient-dark h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
               style="
                 background-image: url('https://soshace.com/wp-content/uploads/2019/12/bug-tracking-tools-inside.jpg');
                 background-size: cover;
               "
             >
-              <span class="mask bg-gradient-primary opacity-6"></span>
-              <h4 class="mt-5 text-white font-weight-bolder position-relative">
+              <span class="mask  opacity-6"></span>
+              <h4 class="mt-5 text-light font-weight-bolder position-relative">
                 Bug Tracking Illustration
               </h4>
-              <p class="text-white position-relative">
+              <p class="text-light position-relative">
                 The more effortless the writing looks, the more effort the
                 writer actually put into the process.
               </p>

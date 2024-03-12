@@ -67,6 +67,7 @@ class ProjectTeamUpdate(CreateView):
         project = get_object_or_404(Project, pk=project_id)
         initial['project'] = project
         return initial
+     
     
 
 
@@ -174,8 +175,18 @@ class ProjectTaskDelete(DeleteView):
 def pieChart(request):
     labels = []
     data = []
-     
-    queryset = Project.objects.order_by('')
+
+    queryset = Task.objects.order_by('-title')
+    #[mumbai,tokio]
+    #[100000,200000]
+    for city in queryset:
+        labels.append(city.name)
+        data.append(city.population)
+        
+    return render(request, 'project/pie_chart.html',{
+        'labels':labels,
+        'data':data
+    })        
 
 # Project Report
     

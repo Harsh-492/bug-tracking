@@ -1,14 +1,15 @@
 from django.shortcuts import render,redirect
 from django.urls import reverse
 from django.views import View
-from django.views.generic.edit import CreateView,UpdateView
+from django.views.generic.edit import CreateView,UpdateView,DeleteView
+from django.views.generic import DetailView
 from .models import User
 from .forms import  ManagerRegistrationForm,DeveloperRegistrationForm
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.views import LoginView
 from django.views.generic import ListView
-from project.models import Project,Task
+from project.models import Project,Task,Project_module
 
 # Create your views here.
 def index(request):
@@ -43,15 +44,25 @@ class UpdateUser(UpdateView):
     form_class = ManagerRegistrationForm
     success_url = '/user/dashboard/'
     
+    # def form_valid(self, form):
+    #         print('form : ',form)
+    #         print("error : ",form.errors)
+    #         return super().form_valid(form)   
     def form_valid(self, form):
-            print('form : ',form)
-            print("error : ",form.errors)
-            return super().form_valid(form)   
-     
-# class UserRegisterView(CreateView):
-#     template_name = "user/user_register.html"
-#     model = User
-#     form_class = 
+        form.instance.user = self.request.user  # Assigning the logged-in user to the 'user' field
+        return super().form_valid(form)
+    
+class DeleteUser(DeleteView):
+    template_name = 'user/DeleteUser.html'
+    model = User
+    success_url = '/user/userlist/'
+    context_object_name = 'users'
+
+
+class UserProfile(DetailView):
+    template_name = 'user/UserProfile.html'
+    model = User
+    context_object_name = "userinfo"
 
 
 class DeveloperRegisterView(CreateView):
@@ -99,13 +110,16 @@ class ManagerDashboardView(ListView):
         startedTask = Task.objects.filter(status="Started").count()
         processingTask = Task.objects.filter(status="Processing").count()
         completeTask = Task.objects.filter(status="Complted").count()
-
+        totalProject = Project.objects.all().count()
+        totalModule = Project_module.objects.all().count()
+        totalTask = Task.objects.all().count()
+        totalUser = User.objects.all().count()
         print("Started Task : ",startedTask)
         print("Processing Task : ",processingTask)
         print("complete Task : ",completeTask)
         # print(".............................................",projects)
         
-        return render(request, 'user/manager_dashboard.html',{"projects":projects,"task":task,"complteTask":completeTask,"processingTask":processingTask,"startedTask":startedTask})
+        return render(request, 'user/manager_dashboard.html',{"projects":projects,"task":task,"complteTask":completeTask,"processingTask":processingTask,"startedTask":startedTask,'TotalProject':totalProject,'Project_module':totalModule,'totalTask':totalTask,'totalUser':totalUser})
     
     template_name = 'user/manager_dashboard.html'
 
