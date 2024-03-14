@@ -204,15 +204,19 @@ class ProjectReport(DetailView):
         project_task_count = Task.objects.filter(Project=self.object).count()
         project_module = Project_module.objects.filter(project=self.object)
         project_module_count = Project_module.objects.filter(project=self.object).count()
+         
         context['project_teams'] = project_teams  # Add ProjectTeam data to the context
         context['project_task'] = project_task
         context['project_module'] = project_module
         context['project_module_count'] = project_module_count
         context['project_task_count'] = project_task_count
         context['project_teams_count'] = project_teams_count
+        total_hours_spent = self.object.total_hours_spent()
+        context['total_hours_spent'] = total_hours_spent
         print("project : ",context['project_teams'])
         print("task : ",context['project_task'])
         print("module : ",context['project_module'])
+        print("total_hours_spent : ",context['total_hours_spent'])
         return context
     
     

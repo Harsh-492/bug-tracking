@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.urls import reverse
+from django.urls import reverse,reverse_lazy
 from django.views import View
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.views.generic import DetailView
@@ -42,15 +42,17 @@ class UpdateUser(UpdateView):
     template_name = 'user/UpdateUser.html'
     model = User
     form_class = ManagerRegistrationForm
-    success_url = '/user/dashboard/'
+    success_url = '/user/userlist/'
     
     # def form_valid(self, form):
     #         print('form : ',form)
     #         print("error : ",form.errors)
     #         return super().form_valid(form)   
-    def form_valid(self, form):
-        form.instance.user = self.request.user  # Assigning the logged-in user to the 'user' field
-        return super().form_valid(form)
+    
+    # def form_valid(self, form):
+    #     form.instance.user = self.request.user  # Assigning the logged-in user to the 'user' field
+    #     print("form : ",form)
+    #     return super().form_valid(form)
     
 class DeleteUser(DeleteView):
     template_name = 'user/DeleteUser.html'

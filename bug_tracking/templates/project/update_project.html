@@ -10,7 +10,7 @@
                         <h2 class="mt-1">Update Project</h2>
                         </center>
 
-                        <form method="post" >
+                        <form method="post" enctype="multipart/form-data">
                                 {% csrf_token %} 
                                 {{form|crispy }}
                                 <center><button type="submit" class="btn btn-dark" style="width: 560px;margin-top: 10px;">Update</button></center>

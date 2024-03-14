@@ -19,5 +19,5 @@ class ProjectModuleName(admin.ModelAdmin):
 
 @admin.register(Task)
 class ProjectTaskAdmin(admin.ModelAdmin):
-    list_display = ["id","Project","Module","title","priority","status","description","totalMinutes"]
+    list_display = ["id","Project","Module","title","priority","status","creattionTime","endTime","description","totalMinutes"]
 

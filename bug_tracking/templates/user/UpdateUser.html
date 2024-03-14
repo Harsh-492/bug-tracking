@@ -18,13 +18,40 @@
                 </div>
                 <div class="card-body">
                   {% comment %} enctype="multipath/form-data" {% endcomment %}
-                  <form method="POST" role="form" enctype="multipart/form-data" >  
+                  <form method="post" enctype="multipart/form-data" >  
                                   {% load crispy_forms_tags %}
                                   {% csrf_token %}
+
+                             
+                                  {% comment %} <div class="mb-3">
+                                    <div class="form-control form-control-lg" for="id_firstName">
+                                    {{form.first_name|as_crispy_field }}    
+                                    </div>
+                                  </div>
+                                  <div class="mb-3">
+                                    <div class="form-control form-control-lg" for="id_lastName">
+                                    {{form.last_name|as_crispy_field }}    
+                                    </div>
+                                  </div>
                                  <div class="mb-3">
                                               <div class="form-control form-control-lg" for="id_email">
                                               {{form.email|as_crispy_field }}    
                                               </div>
+                                  </div>
+                                  <div class="mb-3">
+                                    <div class="form-control form-control-lg" for="id_city">
+                                    {{form.city|as_crispy_field }}    
+                                    </div>
+                                  </div>
+                                  <div class="mb-3">
+                                    <div class="form-control form-control-lg" for="id_country">
+                                    {{form.country|as_crispy_field }}    
+                                    </div>
+                                  </div>
+                                  <div class="mb-3">
+                                    <div class="form-control form-control-lg" for="id_postalcode">
+                                    {{form.postal_code|as_crispy_field }}    
+                                    </div>
                                   </div>
                                   <div class="mb-3">
                                                 <div class="form-control form-control-lg" for="id_userImage">
@@ -41,10 +68,12 @@
                                                       {{form.role|as_crispy_field }}    
                                                 </div>
                                   </div>
-                                  <div class="text-center">
+                                  < class="text-center">
                                           {% comment %} <input type="submit" value="Update" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0"> {% endcomment %}
+                                          {{form|crispy }}
                                           <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Update</button>
-                                  </div>
+
+
                   </form>
                 </div>
               </div>

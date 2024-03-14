@@ -122,103 +122,108 @@
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
                   <i class="far fa-calendar-alt me-2"></i>
-                  <small>Total Estimated Hours - {{projects.estimated_hours}}</small>
+                  <small>Total hours - {{total_hours_spent}}</small>
                 </div>
               </div>
             </div>
             
             
             <div class="card-body pt-4 p-3">
-              {% for taskStatus in project_task %}
-                        {% if taskStatus.status == "Complted" %}
               
-                                      <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">{{taskStatus.status}}</h6>
-                                      <ul class="list-group">
-                                        <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                                          <div class="d-flex align-items-center">
-                                            <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-down"></i></button>
-                                            <div class="d-flex flex-column">
-                                              <h6 class="mb-1 text-dark text-sm">{{taskStatus.title|upper}}</h6>
-                                              <span class="text-xs">{{projects.startDate}} - {{projects.endDate}}</span>
-                                            </div>
-                                          </div>
-                                          {% if taskStatus.priority == "High"  %}
-                                                <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
-                                                  - {{taskStatus.priority}}
-                                                </div>
-                                          {% elif taskStatus.priority == "Medium" %}
-                                                <div class="d-flex align-items-center text-info text-gradient text-sm font-weight-bold">
-                                                  - {{taskStatus.priority}}
-                                                </div>
-                                          {% else %}
-                                                <div class="d-flex align-items-success text-info text-gradient text-sm font-weight-bold">
-                                                  - {{taskStatus.priority}}
-                                                </div>
-                                          {% endif %}
+                        
+              
+                                      <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">Compelted</h6>
+                                      {% for taskStatus in project_task %}
+                                        {% if taskStatus.status == "Complted" %}
+                                                <ul class="list-group">
+                                                  <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                                                    <div class="d-flex align-items-center">
+                                                      <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-down"></i></button>
+                                                      <div class="d-flex flex-column">
+                                                        <h6 class="mb-1 text-dark text-sm">{{taskStatus.title|upper}}</h6>
+                                                        <span class="text-xs">{{taskStatus.creattionTime}} - {{taskStatus.endTime}}</span>
+                                                      </div>
+                                                    </div>
+                                                    {% if taskStatus.priority == "High"  %}
+                                                          <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                            - {{taskStatus.priority}}
+                                                          </div>
+                                                    {% elif taskStatus.priority == "Medium" %}
+                                                          <div class="d-flex align-items-center text-info text-gradient text-sm font-weight-bold">
+                                                            - {{taskStatus.priority}}
+                                                          </div>
+                                                    {% else %}
+                                                          <div class="d-flex align-items-success text-info text-gradient text-sm font-weight-bold">
+                                                            - {{taskStatus.priority}}
+                                                          </div>
+                                                    {% endif %}
 
-                                        </li>
-                                      </ul>
-                          {% endif %}
-              {% endfor %}
-              {% for taskStatus in project_task %}
-              {% if taskStatus.status == "Processing" %}
+                                                  </li>
+                                                </ul>
+                                          {% endif %}
+                                      {% endfor %}
+                          
                                     
-                                        <h6 class="text-uppercase text-body text-xs font-weight-bolder my-3">{{taskStatus.status}}</h6>
-                                        <ul class="list-group">     
-                                          <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                                            <div class="d-flex align-items-center">
-                                              <button class="btn btn-icon-only btn-rounded btn-outline-dark mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-exclamation"></i></button>
-                                              <div class="d-flex flex-column">
-                                                <h6 class="mb-1 text-dark text-sm">{{taskStatus.title|upper}}</h6>
-                                                <span class="text-xs">{{projects.startDate}} - {{projects.endDate}}</span>
-                                              </div>
-                                            </div>
-                                              {% if taskStatus.priority == "High"  %}
-                                                  <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
-                                                    - {{taskStatus.priority}}
-                                                  </div>
-                                              {% elif taskStatus.priority == "Medium" %}
-                                                  <div class="d-flex align-items-center text-info text-gradient text-sm font-weight-bold">
-                                                    - {{taskStatus.priority}}
-                                                  </div>
-                                              {% else %}
-                                                  <div class="d-flex align-items-success text-info text-gradient text-sm font-weight-bold">
-                                                    - {{taskStatus.priority}}
-                                                  </div>
-                                              {% endif %}
-                                          </li>
-                                        </ul>
-                {% endif %}
-                {% endfor %}
-                {% for taskStatus in project_task %}
-                {% if taskStatus.status == "Started" %}
-                                        <h6 class="text-uppercase text-body text-xs font-weight-bolder my-3">{{taskStatus.status}}</h6>
-                                        <ul class="list-group">     
-                                          <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                                            <div class="d-flex align-items-center">
-                                              <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-exclamation"></i></button>
-                                              <div class="d-flex flex-column">
-                                                <h6 class="mb-1 text-dark text-sm">{{taskStatus.title|upper}}</h6>
-                                                <span class="text-xs">{{projects.startDate}} - {{projects.endDate}}</span>
-                                              </div>
-                                            </div>
-                                            {% if taskStatus.priority == "High"  %}
-                                                  <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
-                                                    - {{taskStatus.priority}}
-                                                  </div>
-                                            {% elif taskStatus.priority == "Medium" %}
-                                                  <div class="d-flex align-items-center text-info text-gradient text-sm font-weight-bold">
-                                                    - {{taskStatus.priority}}
-                                                  </div>
-                                            {% else %}
-                                                  <div class="d-flex align-items-success text-info text-gradient text-sm font-weight-bold">
-                                                    - {{taskStatus.priority}}
-                                                  </div>
+                                        <h6 class="text-uppercase text-body text-xs font-weight-bolder my-3">Processing</h6>
+                                        {% for taskStatus in project_task %}
+                                            {% if taskStatus.status == "Processing" %}
+                                                  <ul class="list-group">     
+                                                    <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                                                      <div class="d-flex align-items-center">
+                                                        <button class="btn btn-icon-only btn-rounded btn-outline-dark mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-exclamation"></i></button>
+                                                        <div class="d-flex flex-column">
+                                                          <h6 class="mb-1 text-dark text-sm">{{taskStatus.title|upper}}</h6>
+                                                          <span class="text-xs">{{taskStatus.creattionTime}} - {{taskStatus.endTime}}</span>
+                                                        </div>
+                                                      </div>
+                                                        {% if taskStatus.priority == "High"  %}
+                                                            <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                              - {{taskStatus.priority}}
+                                                            </div>
+                                                        {% elif taskStatus.priority == "Medium" %}
+                                                            <div class="d-flex align-items-center text-info text-gradient text-sm font-weight-bold">
+                                                              - {{taskStatus.priority}}
+                                                            </div>
+                                                        {% else %}
+                                                            <div class="d-flex align-items-success text-info text-gradient text-sm font-weight-bold">
+                                                              - {{taskStatus.priority}}
+                                                            </div>
+                                                        {% endif %}
+                                                    </li>
+                                                  </ul>
                                             {% endif %}
-                                          </li>
-                                        </ul>
-               {% endif %}
-               {% endfor %}
+                                        {% endfor %}
+                          
+                                        <h6 class="text-uppercase text-body text-xs font-weight-bolder my-3">Started</h6>
+                                        {% for taskStatus in project_task %}
+                                            {% if taskStatus.status == "Started" %}
+                                                      <ul class="list-group">     
+                                                        <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                                                          <div class="d-flex align-items-center">
+                                                            <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-exclamation"></i></button>
+                                                            <div class="d-flex flex-column">
+                                                              <h6 class="mb-1 text-dark text-sm">{{taskStatus.title|upper}}</h6>
+                                                              <span class="text-xs">{{taskStatus.creattionTime}} - {{taskStatus.endTime}}</span>
+                                                            </div>
+                                                          </div>
+                                                          {% if taskStatus.priority == "High"  %}
+                                                                <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
+                                                                  - {{taskStatus.priority}}
+                                                                </div>
+                                                          {% elif taskStatus.priority == "Medium" %}
+                                                                <div class="d-flex align-items-center text-info text-gradient text-sm font-weight-bold">
+                                                                  - {{taskStatus.priority}}
+                                                                </div>
+                                                          {% else %}
+                                                                <div class="d-flex align-items-success text-info text-gradient text-sm font-weight-bold">
+                                                                  - {{taskStatus.priority}}
+                                                                </div>
+                                                          {% endif %}
+                                                        </li>
+                                                      </ul>
+                                          {% endif %}
+                                      {% endfor %}
+                        
                                       
             </div>
           </div>

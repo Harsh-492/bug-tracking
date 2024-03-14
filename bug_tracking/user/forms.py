@@ -6,7 +6,7 @@ from django.db import transaction
 class ManagerRegistrationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ['username', 'email', 'age', 'salary','role', 'userImage', 'password1', 'password2']
+        fields = ['username','first_name','last_name', 'email', 'age', 'salary','role', 'city','country','postal_code','userImage', 'password1', 'password2']
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
