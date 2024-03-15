@@ -1,0 +1,25 @@
+
+{% extends "../base.html" %}
+{% load static %}
+
+
+{% block content %}
+<center>
+    <form action="" method="POST" style="margin-top: 250px;">
+        {% csrf_token %}
+        <div class="card" style="width: 50rem;border-radius: 30px;border-color: rgb(0, 0, 0);background-color: white;">
+            <div class="card-body">
+            <h5 class="card-title">{{module.project}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{module.moduleName}}</h6>
+            <p class="card-text">Are You Sure You Want To Delete Module ?</p>
+            <a href="{% url 'projectmodulelist' %}" class="card-link btn btn-info">Cancel</a>
+            <!-- <input type="submit" value="Cancel" class="card-link btn btn-light"> -->
+            <input type="submit" value="Delete" class="card-link btn btn-danger">
+            </div>
+        </div>
+    </form>
+</center>
+{% endblock content %}
+
+    
+    

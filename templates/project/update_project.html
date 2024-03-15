@@ -1,0 +1,22 @@
+{% extends "../base.html" %}
+{% load static %} 
+{% load crispy_forms_tags %} 
+{% block content %}
+      <div class="container">
+            <div class="row">
+              <center>
+                  <div class="col-md-6 my-2" style="border: solid;width: 30rem; background-color: white;justify-content: left;">
+                        <center>
+                        <h2 class="mt-1">Update Project</h2>
+                        </center>
+
+                        <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %} 
+                                {{form|crispy }}
+                                <center><button type="submit" class="btn btn-dark" style="width: 560px;margin-top: 10px;">Update</button></center>
+                        </form>
+                  </div>
+              </center>
+            </div>
+      </div>
+{% endblock content %}

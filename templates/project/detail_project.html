@@ -1,0 +1,39 @@
+
+{% extends "../base.html" %}
+{% load static %}
+
+
+{% block content %}
+<center style="margin-top: 30px;">
+    <div class="card text-black  mt-3" style="width: 40rem;height: fit-content;border-radius: 30px;border-color: rgb(0, 0, 0);">
+        <h3 class="card-header bg-light">{{projects.name}}</h3>
+        <div class="card-body">
+            <h5 class="card-title">Technology : {{projects.technology}}</h5>
+            <p class="card-text">Descriptions : {{projects.description}}</p>
+            {% if project_teams %}
+            <ul class="list-group">
+                <h3 class="h3">Users :</h3>
+                {% for team_member in project_teams %}
+                {% if team_member %}
+                <li class="list-group-item list-group-item-info mx-9">{{ team_member.user.username }}</li>
+                {% endif %}
+                <!-- Add other team member information as needed -->
+                {% endfor %}
+            </ul>
+            {% else %}
+            <a href='{% url "update_team" projects.id   %}' class="text-secondary font-weight-bold  text-light text-xs btn btn-info" data-toggle="tooltip" data-original-title="Edit user">
+                Create
+            </a> 
+            <br>
+            {% endif %}
+              <br>
+            <a href="{% url 'project_list' %}" class="btn btn-warning">GO TO PROJECT LIST</a>
+        </div>
+      </div>
+    </center>
+
+    
+{% endblock content %}
+
+    
+    
