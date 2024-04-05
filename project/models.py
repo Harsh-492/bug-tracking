@@ -23,11 +23,6 @@ class Project(models.Model):
     endDate = models.DateField()
     projectimg = models.ImageField(upload_to= 'project/',null=True,blank=True)
     
-    def total_hours_spent(self):
-        tasks = Task.objects.filter(Project=self)
-        total_hours = sum(task.totalMinutes for task in tasks)
-        return total_hours
-    
     class Meta:
         db_table = "project"
     
@@ -81,9 +76,19 @@ class Task(models.Model):
     status = models.CharField(choices=status_choices,max_length=100,null=True,blank=True)
 
 
-    
+    def total_hours_spent(self):
+        if self.endTime and self.creattionTime:
+            time_difference = self.endTime - self.creattionTime
+            total_hours = round(time_difference.total_seconds() / 3600 )# Convert seconds to hours
+            print("total_hours : ",total_hours)
+            return total_hours
+
     class Meta:
         db_table = "Task"
+
+
+    def __str__(self):
+        return self.title
 
 # Signal receiver function
 @receiver(pre_save, sender=Task)

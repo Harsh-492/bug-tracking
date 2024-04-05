@@ -4,16 +4,45 @@ from django.views import View
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.views.generic import DetailView
 from .models import User
-from .forms import  ManagerRegistrationForm,DeveloperRegistrationForm
+from .forms import  ManagerRegistrationForm,UpdateProfile
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.views import LoginView
 from django.views.generic import ListView
-from project.models import Project,Task,Project_module
-
+from project.models import Project,Task,Project_module,ProjectTeam
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def index(request):
-    return render(request,"index.html")
+    # form = ManagerRegistrationForm(request.POST)
+    # user = request.user
+    # if form.is_valid():
+    #     username = form.cleaned_data['username']
+    #     email = form.cleaned_data['email']
+    #     userImage = form.cleaned_data['userImage']
+    #     role = form.cleaned_data['role']
+    #     password1 = form.cleaned_data['password1']
+    #     password2 = form.cleaned_data['password2']
+    #     reg = User(username=username,email=email,userImage=userImage,role=role,password1=password1,password2=password2)
+    #     reg.save()
+        
+    return render(request,"user/home.html")
+
+def about(request):
+    return render(request, "user/about.html")
+
+def services(request):
+    return render(request,"user/services.html")
+def technology(request):
+    return render(request,'user/technology.html')
+def support(request):
+    return render(request,'user/support.html')
+class Home(CreateView):
+    template_name = "user/home.html"
+    model = User
+    fomr_class = ManagerRegistrationForm
+
+@method_decorator(login_required(login_url="/user/login/"), name='dispatch')
 
 class ManagerRegisterView(CreateView):
     template_name = "user/manager_register.html"
@@ -21,11 +50,11 @@ class ManagerRegisterView(CreateView):
     form_class =  ManagerRegistrationForm
     success_url = '/user/login/'
 
-       
+
     def form_valid(self, form):
         email = form.cleaned_data.get('email')
-        userImage = form.cleaned_data.get('userImage')
-        print(userImage)
+        # userImage = form.cleaned_data.get('userImage')
+        # print(userImage)
         print("email....",email)
         if sendMail(email):
             print("Mail sent successfully")
@@ -41,26 +70,17 @@ class UserList(ListView):
 class UpdateUser(UpdateView):
     template_name = 'user/UpdateUser.html'
     model = User
-    form_class = ManagerRegistrationForm
+    form_class = UpdateProfile
     success_url = '/user/userlist/'
 
     # def get_object(self, queryset=None):
     #         return self.request.user  # This assumes that the logged-in user is updating their own profile
     
+
     def form_valid(self, form):
-        # Custom logic when the form is valid
-        # No need to assign user instance here as it's already handled by the form
-        return super().form_valid(form)
-    
-    # def form_valid(self, form):
-    #         print('form : ',form)
-    #         print("error : ",form.errors)
-    #         return super().form_valid(form)   
-    
-    # def form_valid(self, form):
-    #     form.instance.user = self.request.user  # Assigning the logged-in user to the 'user' field
-    #     print("form : ",form)
-    #     return super().form_valid(form)
+            print('form : ',form)
+            print("error : ",form.errors)
+            return super().form_valid(form)   
     
 class DeleteUser(DeleteView):
     template_name = 'user/DeleteUser.html'
@@ -74,19 +94,11 @@ class UserProfile(DetailView):
     model = User
     context_object_name = "userinfo"
 
-
-class DeveloperRegisterView(CreateView):
-    template_name = "user/developer_register.html"
-    model = User
-    form_class = DeveloperRegistrationForm
-    success_url = '/login/'
-
-
 def sendMail(to):
     subject = 'Welcome to PMS24'
     message = 'Hope you are enjoying your Django Tutorials'
     #recepientList = ["samir.vithlani83955@gmail.com"]
-    recepientList = ['to']
+    recepientList = [to]
     EMAIL_FROM = settings.EMAIL_HOST_USER
     send_mail(subject,message, EMAIL_FROM, recepientList)
     #attach file
@@ -106,7 +118,7 @@ class UserLoginView(LoginView):
             else:
                 return '/user/dashboard/'
             
-
+@method_decorator(login_required(login_url="/user/login/"), name='dispatch')
 class ManagerDashboardView(ListView):
     # model = Task
     # print("task : ",Task)
@@ -116,20 +128,23 @@ class ManagerDashboardView(ListView):
         # print("ManagerDashboardView")           
         projects = Project.objects.all() #select * from project
         task = Task.objects.all()
-        
+        projectteam = ProjectTeam.objects.all()
         startedTask = Task.objects.filter(status="Started").count()
         processingTask = Task.objects.filter(status="Processing").count()
         completeTask = Task.objects.filter(status="Complted").count()
+        HighTask = Task.objects.filter(priority="High").count()
+        MediumTask = Task.objects.filter(priority="Medium").count()
+        LowTask = Task.objects.filter(priority="Low").count()
         totalProject = Project.objects.all().count()
         totalModule = Project_module.objects.all().count()
         totalTask = Task.objects.all().count()
         totalUser = User.objects.all().count()
+        # developer = ProjectTeam.filter(request.user.role == "Developer" )
         print("Started Task : ",startedTask)
         print("Processing Task : ",processingTask)
         print("complete Task : ",completeTask)
         # print(".............................................",projects)
-        
-        return render(request, 'user/manager_dashboard.html',{"projects":projects,"task":task,"complteTask":completeTask,"processingTask":processingTask,"startedTask":startedTask,'TotalProject':totalProject,'Project_module':totalModule,'totalTask':totalTask,'totalUser':totalUser})
+        return render(request, 'user/manager_dashboard.html',{"projectteam":projectteam,"projects":projects,"task":task,"complteTask":completeTask,"processingTask":processingTask,"startedTask":startedTask,'TotalProject':totalProject,'Project_module':totalModule,'totalTask':totalTask,'totalUser':totalUser,'HighTask':HighTask,'MediumTask':MediumTask,'LowTask':LowTask })
     
     template_name = 'user/manager_dashboard.html'
 

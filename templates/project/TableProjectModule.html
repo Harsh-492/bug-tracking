@@ -16,9 +16,11 @@
               <thead>
                 <tr>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><h6>Project</h6></th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><h6>Module</h6></th>
+                  <th class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><h6>Module</h6></th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"><h6>Description</h6></th>
+                  {% if request.user.role == 'Manager' or  request.user.role == "Admin" %}
                   <th class="text-secondary opacity-7"><h6>ACTION</h6></th>
+                  {% endif %}
                 </tr>
               </thead>
               <tbody>
@@ -42,6 +44,7 @@
                     <p class="text-xs font-weight-bold mb-0">{{module.description}}</p>
                     
                   </td>
+                  {% if request.user.role == 'Manager' or  request.user.role == "Admin" %}
                   <td class="align-middle">
                     <a href="{% url "projectmoduleupdate" module.id %}" class="text-secondary font-weight-bold text-xs btn btn-success" data-toggle="tooltip" data-original-title="Edit user">
                       EDIT
@@ -52,7 +55,7 @@
                       </a>
                     
                    </td>
-                   
+                   {% endif %}
                 </tr>
                 {% endfor %}
               </tbody>

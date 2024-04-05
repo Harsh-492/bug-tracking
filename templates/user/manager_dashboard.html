@@ -7,9 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <style> 
-    
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
     <div class="container-fluid py-4">
@@ -151,7 +149,7 @@
 <br>
 
 <div class="row px-md-3" style="margin-top: 15px;">
-      
+        
                           <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
                             <div class="card">
                               <div class="card-body p-3">
@@ -202,7 +200,7 @@
                                               
                                             </tbody>
                                           </table>
-                                           <button class="card-button btn btn-info" style="align-self: center;background-color: #007bff;border: none;border-radius: 4px;color: #fff;padding: 8px 16px;cursor: pointer;margin:20px;padding:10px">+ Create Issue</button>
+                                           {% comment %} <button class="card-button btn btn-info" style="align-self: center;background-color: #007bff;border: none;border-radius: 4px;color: #fff;padding: 8px 16px;cursor: pointer;margin:20px;padding:10px">+ Create Issue</button> {% endcomment %}
                                         </div>
                                       </div>
                                     </div>
@@ -327,6 +325,95 @@
                             </div>
                           </div>
 </div>
+
+{% comment %} <canvas id="taskStatusChart"></canvas> {% endcomment %}
+
+<div  class="row" style="height: 400; width: 900px;margin-right: 10px;margin-top: 20px;border-radius: 10px;border-color:black ">
+  <div>
+    
+  </div>
+  <div style="width: 400px; height: 430px; background-color: white;margin: 10px;padding: 20px;border-radius: 10%;border-color: black;box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.4);">
+    <p5 style="margin-top: 30px;margin-left: 100px;responsive:true">Task status</p5>
+    <canvas id="pie-chart" style="width: 400px; height: 400px;margin-right: 20px;"></canvas>
+    {% comment %} <canvas id="pie-chart1" ></canvas> {% endcomment %}
+  </div>
+  
+  <div style="width: 400px; height: 430px;background-color: white;margin: 10px;padding: 20px;border-radius: 10%;box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.4);">
+          <p5 style="margin-top: 30px;margin-left: 100px;responsive:true">Task Priority</p5>
+          <canvas id="pie-chart1" style="width: 400px; height: 400px;float: left; margin-right: 20px;"></canvas>
+        </div>
+      
+</div>
+<script>
+  // JavaScript code to create the chart
+  const ctx = document.getElementById('pie-chart').getContext('2d');
+  const data = {
+      labels: ['Started', 'Processing', 'Complted'],
+      datasets: [{
+          label: 'Task Status',
+          data: [{{ startedTask }}, {{ processingTask }}, {{ complteTask }}],
+          backgroundColor: [
+              'rgb(255, 99, 132)',
+              'rgb(54, 162, 235)',
+              'rgb(75, 192, 192)' 
+          ]
+      }]
+  };
+  const myChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: data,
+      options : {
+        responsive:true,
+      }
+  });
+{% comment %} ----------------------------------------------------------------------------------------------- {% endcomment %}
+  const ctx1 = document.getElementById('pie-chart1').getContext('2d');
+  const data1 = {
+      labels: ['High', 'Medium', 'Low'],
+      datasets: [{
+          label: 'Task Priority',
+          data: [{{ HighTask }}, {{ MediumTask }}, {{ LowTask }}],
+          backgroundColor: [
+          'rgb(255, 80, 80)',
+          'rgb(255, 255, 77)',
+          'rgb(102, 255, 102)'
+          ],
+
+      }]
+  };
+  const myChart1 = new Chart(ctx1, {
+      type: 'doughnut',
+      data: data1,
+      options : {
+        responsive:true,
+      }
+
+  });
+
+</script>
+{% comment %} <script>
+  const ctx = document.getElementById('pie-chart1').getContext('2d');
+  const data = {
+      labels: ['High', 'Medium', 'Low'],
+      datasets: [{
+          label: 'Task Status',
+          data: [{{ High }}, {{ Medium }}, {{ Low }}],
+          backgroundColor: [
+              'rgb(255, 99, 132)',
+              'rgb(54, 162, 235)',
+              'rgb(75, 192, 192)'
+          ]
+      }]
+  };
+  const myChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: data,
+      options : {
+        responsive:true,
+      }
+  });
+  
+</script> {% endcomment %}
 
       
      

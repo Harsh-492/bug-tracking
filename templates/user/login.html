@@ -65,16 +65,16 @@
                   </div>
                 </form>
               </div>
+              {% if request.user.role == 'Manager' or  request.user.role == "Admin" %}
               <div class="card-footer text-center pt-0 px-lg-2 px-1">
                 <p class="mb-4 text-sm mx-auto">
                   Don't have an account?
                   <a
                     href="{% url 'manager-register' %}"
-                    class="text-dark text-gradient font-weight-bold"
-                    >Register</a
-                  >
+                    class="text-dark text-gradient font-weight-bold">Register</a>
                 </p>
               </div>
+              {% endif %}
             </div>
           </div>
           <div

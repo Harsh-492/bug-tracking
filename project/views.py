@@ -5,6 +5,8 @@ from django.views.generic import ListView,DeleteView,DetailView,UpdateView
 from .forms import ProjectCreationForm
 from .models import Project,ProjectTeam,Project_module,Task,UserTask
 from .forms import ProjectTeamCreationForm,ProjectModuleForm,ProjectTaskForm,UserTaskForm
+from django.core.mail import send_mail
+from django.conf import settings
 from user.models import User
 from django.views import View
 # Create your views here.
@@ -19,14 +21,6 @@ class ProjectListView(ListView):
     template_name = 'project/list.html'
     model = Project
     context_object_name = 'projects'
-    # print(status)
-    # def get_context_data(self, **kwargs):
-    #         context = super().get_context_data(**kwargs)
-    #         model2_data = Status.objects.all()
-    #         context['model2_data'] = model2_data
-    #         print(model2_data)
-    #         return context
-
 
 class ProjectTeamCreateView(CreateView):    
     template_name = 'project/create_team.html'
@@ -67,10 +61,58 @@ class ProjectTeamUpdate(CreateView):
         project = get_object_or_404(Project, pk=project_id)
         initial['project'] = project
         return initial
+    
+
+    def form_valid(self, form):
+        
+        user = form.cleaned_data.get('user')
+        email = user.email
+        userName = user.first_name
+        project_id = self.kwargs.get('project_id')
+        # userImage = form.cleaned_data.get('userImage')
+        # print(userImage)
+        print("email....",email)
+        print("projectID....",project_id)
+        print("userName....",userName)
+        if sendMail(email,project_id,userName):
+            print("Mail sent successfully")
+            return super().form_valid(form)
+        else:
+            return super().form_valid(form)
      
     
 
 
+def sendMail(to,project_id,userName):
+    project = Project.objects.get(id=project_id)
+    subject = 'Task Assignment'
+    # message = 'Hope you are enjoying your Django Tutorials' + 'project is ' + project.name
+    message = '''
+Dear ''' +  userName + ''',
+
+I hope this message finds you well. I'm writing to assign you a task that aligns with your expertise and responsibilities within the team. Below are the details of the task:
+
+Project : ''' + project.name + '''
+Description:  ''' + project.description + '''
+Technology: ''' + project.technology + '''
+Instructions: Complete The Project as soon as Possible And Then  Submit the Result to us.
+
+Please review the task details carefully and let me know if you have any questions or need further clarification. Your prompt attention to this matter is greatly appreciated.
+
+Thank you for your continued dedication and contribution to our team's success.
+
+Best regards,
+Manager
+98989 67543
+'''
+
+    #recepientList = ["samir.vithlani83955@gmail.com"]
+    recepientList = [to]
+    EMAIL_FROM = settings.EMAIL_HOST_USER
+    send_mail(subject,message, EMAIL_FROM, recepientList)
+    #attach file
+    #html
+    return True
 
 class ProjectDeleteView(DeleteView):
     template_name = 'project/delete_project.html'
@@ -95,20 +137,6 @@ class ProjectDetailView(DetailView):
         # print("task : ",context['project_task'])
         # print("module : ",context['project_module'])
         return context
-    
-    # def post(self, request, *args, **kwargs):
-    #         # Handle form submission to add users to the project team
-    #     project = self.get_object()
-    #     user_id = request.POST.get('user_id')
-
-    #     if user_id:
-    #         user = User.objects.get(pk=user_id)
-    #         # Check if the user is not already in the project team
-    #         if not ProjectTeam.objects.filter(project=project, user=user).exists():
-    #             project_team_member = ProjectTeam.objects.create(project=project, user=user)
-    #             # Add any additional logic or messages as needed
-
-    #     return self.get(request, *args, **kwargs)
     
 class ProjectUpdateView(UpdateView):
     template_name = 'project/update_project.html'
@@ -193,7 +221,7 @@ def pieChart(request):
 class ProjectReport(DetailView):
     template_name = 'project/ProjectReport.html'
     model = Project
-    context_object_name = 'projects'
+    context_object_name = 'projects'    
 
     
     def get_context_data(self, **kwargs):
@@ -204,21 +232,16 @@ class ProjectReport(DetailView):
         project_task_count = Task.objects.filter(Project=self.object).count()
         project_module = Project_module.objects.filter(project=self.object)
         project_module_count = Project_module.objects.filter(project=self.object).count()
-         
         context['project_teams'] = project_teams  # Add ProjectTeam data to the context
         context['project_task'] = project_task
         context['project_module'] = project_module
         context['project_module_count'] = project_module_count
         context['project_task_count'] = project_task_count
         context['project_teams_count'] = project_teams_count
-        total_hours_spent = self.object.total_hours_spent()
+        total_hours_spent = (task.total_hours_spent() for task in project_task)
         context['total_hours_spent'] = total_hours_spent
         print("project : ",context['project_teams'])
         print("task : ",context['project_task'])
         print("module : ",context['project_module'])
-        print("total_hours_spent : ",context['total_hours_spent'])
+        print("total_hours_spent : ",context['total_hours_spent']) 
         return context
-    
-    
-    
-    

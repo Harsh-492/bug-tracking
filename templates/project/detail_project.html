@@ -14,8 +14,9 @@
             <ul class="list-group">
                 <h3 class="h3">Users :</h3>
                 {% for team_member in project_teams %}
+                
                 {% if team_member %}
-                <li class="list-group-item list-group-item-info mx-9">{{ team_member.user.username }}</li>
+                <li class="list-group-item list-group-item-info mx-9"> <img src="{{team_member.user.userImage.url}}" class="avatar avatar-sm me-3" alt="user1">{{ team_member.user.username }}</li>
                 {% endif %}
                 <!-- Add other team member information as needed -->
                 {% endfor %}
@@ -27,6 +28,7 @@
             <br>
             {% endif %}
               <br>
+            <a href="{% url 'projectreport' projects.id %}" class="btn btn-warning">PROJECT REPORT</a>
             <a href="{% url 'project_list' %}" class="btn btn-warning">GO TO PROJECT LIST</a>
         </div>
       </div>

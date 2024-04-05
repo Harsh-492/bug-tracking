@@ -1,11 +1,17 @@
 from django.contrib import admin
 from django.urls import path
-from .views import ManagerRegisterView,UserLoginView,ManagerDashboardView,DeveloperDashboardView,UserList,UpdateUser,UpdateTaskStatus,DeleteUser,UserProfile
+from .views import about,services,technology,support,ManagerRegisterView,UserLoginView,ManagerDashboardView,DeveloperDashboardView,UserList,UpdateUser,UpdateTaskStatus,DeleteUser,UserProfile,Home
 from django.contrib.auth.views import LogoutView,LoginView 
 
 
 urlpatterns = [
     
+
+    path('',Home.as_view(),name='home'),
+    path('about/',about,name='about'),
+    path('services/',services,name='services'),
+    path('technology/',technology,name='technology'),
+    path('supprt/',support,name='support'),
     path('manager-register/',ManagerRegisterView.as_view(),name="manager-register"),
     path("login/",UserLoginView.as_view(),name="login"),
     path("dashboard/",ManagerDashboardView.as_view(),name="dashboard"),

@@ -83,22 +83,25 @@
                   <div class="d-flex flex-column">
                     <h6 class="mb-3 text-sm">Project Task</h6>
                     {% for task in project_task %}
-                    <span class="mb-2 text-xs">{{task.title|capfirst}}</span></span>
+                    <span class="mb-2 text-xs">{{task.title|capfirst}}
+                      <span class=" ms-auto text-end text-danger  font-weight-bold">
+                      - {{task.priority}}</span>
+                    </span>
                     {% endfor %}
                     {% comment %} <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">lucas@stone-tech.com</span></span>
                     <span class="text-xs">VAT Number: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span> {% endcomment %}
                   </div>
                   <div class="ms-auto text-end">
-                    <p style="margin: 5px;padding: 5px;height: 40px;width: 40px;border-radius: 20px;" class="btn btn-danger">{{project_task_count}}</p>
                     {% comment %} <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
                     <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a> {% endcomment %}
+                    <p style="margin: 5px;padding: 5px;height: 40px;width: 40px;border-radius: 20px;" class="btn btn-danger">{{project_task_count}}</p>
                   </div>
                 </li>
                 <li class="list-group-item border-0 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
                   <div class="d-flex flex-column">
                     <h6 class="mb-3 text-sm">Project Team Member</h6>
                     {% for team_member in project_teams  %}
-                    <span class="mb-2 text-xs">{{team_member.user.username|capfirst}}</span>
+                    <span class="mb-2 text-xs"><img src="{{team_member.user.userImage.url}}" class="avatar avatar-sm me-3" alt="user1">{{team_member.user.username|capfirst}}</span>
                     {% endfor %}
                     {% comment %} <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">ethan@fiber.com</span></span>
                     <span class="text-xs">VAT Number: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span> {% endcomment %}
@@ -122,7 +125,7 @@
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
                   <i class="far fa-calendar-alt me-2"></i>
-                  <small>Total hours - {{total_hours_spent}}</small>
+                  {% comment %} <small>Total hours - {{total_hours_spent}}</small> {% endcomment %}
                 </div>
               </div>
             </div>
@@ -145,17 +148,20 @@
                                                       </div>
                                                     </div>
                                                     {% if taskStatus.priority == "High"  %}
-                                                          <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
-                                                            - {{taskStatus.priority}}
+                                                          <div class="d-flex align-items-center text-info text-gradient text-sm font-weight-bold">
+                                                            - {{taskStatus.total_hours_spent}}:00 Hours
                                                           </div>
+                                                            
                                                     {% elif taskStatus.priority == "Medium" %}
                                                           <div class="d-flex align-items-center text-info text-gradient text-sm font-weight-bold">
-                                                            - {{taskStatus.priority}}
-                                                          </div>
+                                                            - {{taskStatus.total_hours_spent}}:00 Hours
+                                                          </div> 
+                                                            
                                                     {% else %}
                                                           <div class="d-flex align-items-success text-info text-gradient text-sm font-weight-bold">
-                                                            - {{taskStatus.priority}}
-                                                          </div>
+                                                            - {{taskStatus.total_hours_spent}}:00 Hours
+                                                          </div> 
+                                                          
                                                     {% endif %}
 
                                                   </li>
@@ -177,17 +183,18 @@
                                                         </div>
                                                       </div>
                                                         {% if taskStatus.priority == "High"  %}
-                                                            <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
-                                                              - {{taskStatus.priority}}
-                                                            </div>
+                                                             <div class="d-flex align-items-center text-info text-gradient text-sm font-weight-bold">
+                                                              - {{taskStatus.total_hours_spent}}:00 Hours
+                                                            </div> 
+                                                           
                                                         {% elif taskStatus.priority == "Medium" %}
                                                             <div class="d-flex align-items-center text-info text-gradient text-sm font-weight-bold">
-                                                              - {{taskStatus.priority}}
+                                                              - {{taskStatus.total_hours_spent}}:00 Hours
                                                             </div>
                                                         {% else %}
-                                                            <div class="d-flex align-items-success text-info text-gradient text-sm font-weight-bold">
-                                                              - {{taskStatus.priority}}
-                                                            </div>
+                                                             <div class="d-flex align-items-success text-info text-gradient text-sm font-weight-bold">
+                                                              - {{taskStatus.total_hours_spent}}:00 Hours
+                                                            </div> 
                                                         {% endif %}
                                                     </li>
                                                   </ul>
@@ -202,28 +209,36 @@
                                                           <div class="d-flex align-items-center">
                                                             <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-exclamation"></i></button>
                                                             <div class="d-flex flex-column">
-                                                              <h6 class="mb-1 text-dark text-sm">{{taskStatus.title|upper}}</h6>
+                                                              <h6 class="mb-1 text-dark text-sm">{{taskStatus.title|upper}} </h6>
                                                               <span class="text-xs">{{taskStatus.creattionTime}} - {{taskStatus.endTime}}</span>
                                                             </div>
                                                           </div>
                                                           {% if taskStatus.priority == "High"  %}
-                                                                <div class="d-flex align-items-center text-danger text-gradient text-sm font-weight-bold">
-                                                                  - {{taskStatus.priority}}
-                                                                </div>
+                                                                <div class="d-flex align-items-center text-info text-gradient text-sm font-weight-bold">
+                                                                  - {{taskStatus.total_hours_spent}} Hours
+                                                                </div> 
                                                           {% elif taskStatus.priority == "Medium" %}
                                                                 <div class="d-flex align-items-center text-info text-gradient text-sm font-weight-bold">
-                                                                  - {{taskStatus.priority}}
-                                                                </div>
+                                                                  - {{taskStatus.total_hours_spent}} Hours
+                                                                </div> 
                                                           {% else %}
                                                                 <div class="d-flex align-items-success text-info text-gradient text-sm font-weight-bold">
-                                                                  - {{taskStatus.priority}}
-                                                                </div>
+                                                                  - {{taskStatus.total_hours_spent}} Hours
+                                                                </div> 
+                                                              
                                                           {% endif %}
                                                         </li>
                                                       </ul>
                                           {% endif %}
                                       {% endfor %}
-                        
+
+
+                                      {% comment %} {{project_task}}
+                                      {% for  task in project_task %}
+                                      Time: {{task.total_hours_spent}} <br>
+                                      {% endfor %} {% endcomment %}
+
+                                      {% comment %} Total Hours Spent on Project: {{ total_hours_spent }} {% endcomment %}
                                       
             </div>
           </div>

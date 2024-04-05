@@ -8,6 +8,7 @@ class ManagerRegistrationForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'age', 'salary','role', 'userImage', 'password1', 'password2']
         
+        
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['userImage'].required = False
@@ -20,19 +21,16 @@ class ManagerRegistrationForm(UserCreationForm):
             user.save()
         return user
 
-    
+class UpdateProfile(forms.ModelForm):
+       class Meta:
+            model = User
+            fields =['username','first_name','last_name', 'email', 'age', 'salary','role', 'userImage']
+            required = {
+                 'username':False
+            }
 
-class DeveloperRegistrationForm(UserCreationForm):
-    class Meta(UserCreationForm.Meta):
-        model = User
-        fields = ['username','email','age','salary','password1','password2']
 
-    @transaction.atomic
-    def save(self):
-        user = super().save(commit=False)
-        user.is_developer = True
-        user.save()
-        return user
-    
+        
+
 
 

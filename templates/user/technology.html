@@ -1,0 +1,462 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.technologies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.tech-item {
+  flex-basis: calc(30% - 20px);
+  margin: 0 20px 20px 0;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+}
+
+.tech-item:nth-child(3n) {
+  margin-right: 0;
+}
+
+.tech-item h2 {
+  font-size: 24px;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.tech-item p {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+@media (max-width: 1000px) {
+  .tech-item {
+    flex-basis: 100%;
+  }
+}
+    </style>
+</head>
+<body>
+  <div class="container">
+    <div class="technologies">
+      <div class="tech-item">
+        <h2>Python</h2>
+        <p>Python is a high-level object oriented and procedural language. It is one of the easiest and the most reliable languages for scripting codes. Python is feature loaded with advantages of code portability....</p>
+      </div>
+      <div class="tech-item">
+        <h2>Django</h2>
+        <p>Django is a high-level & popular python programming framework that has an active and thriving community of developers, it is simple yet powerful and highly scalable.</p>
+      </div>
+      <div class="tech-item">
+        <h2>Artificial Intelligence</h2>
+        <p>Artificial intelligence is the human-like simulation of intelligence, it is trained to take certain defined actions and make predictions based on previously categorized data. Al comprises of ML and DL sciences.</p>
+      </div>
+      <div class="tech-item">
+        <h2>Flutter</h2>
+        <p>Flutter-crafted by google, flutter is an open-source UI software development kit based on dart programming language. it is one of the most popular cross-platform application development toolkit.</p>
+      </div>
+      <div class="tech-item">
+        <h2>Golang</h2>
+        <p>Golang or popularly knowns as go is one of the most dynamic programming language that gained popularity ever since it was made publicly available in the year 2012.</p>
+      </div>
+      <div class="tech-item">
+        <h2>RPA</h2>
+        <p>Today, automation is taking charge of the industries globally, it may, at first, seem like jobs of millions are in danger but fortunately it is the other way round. Though, as compared to other programming languages, go libraries</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html> -->
+
+<!--
+=========================================================
+* Argon Dashboard 2 - v2.0.4
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/argon-dashboard
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="{% static './style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"  type = "text/css">
+  <!-- Nucleo Icons -->
+  
+  <link href = "{% static './assets/css/nucleo-icons.css' %}" rel="stylesheet" type="text/css" />
+  {% comment %} <link href="./assets/css/nucleo-svg.css" rel="stylesheet" /> {% endcomment %}
+  <link href = "{% static './assets/css/nucleo-svg.css' %}" rel="stylesheet"  type="text/css"/>
+  <!-- Font Awesome Icons -->
+  {% comment %} <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script> {% endcomment %}
+  {% comment %} <link href="./assets/css/nucleo-svg.css" rel="stylesheet" /> {% endcomment %}
+  <link href = "{% static './assets/css/nucleo-svg.css' %}" rel="stylesheet"  type="text/css"/>
+    <link href = "{% static './assets/css/argon-dashboard.css' %}" rel="stylesheet"  type="text/css"/>
+    <link href="{% static './assets/font-awesome-4.7.0/css/font-awesome.min.css' %}"  type="text/css"/>
+    <style>
+.container__title {
+  margin: 0 0 20px;
+  color: #333333;
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  }
+  
+  .container__content {
+  background: white;
+  padding: 20px;
+  border-radius: 4px;
+  max-width: 600px;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 20px;
+  }
+  
+  .container__content p {
+  margin: 0;
+  color: #333333;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 30px;
+  }
+  
+  .container__reviews {
+  margin: 40px 0;
+  }
+  
+  .container__button {
+  display: block;
+  background: DodgerBlue;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  margin: 10px auto;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transform: translateY(0);
+  transition: transform 0.25s;
+  }
+  
+  .container__button:hover {
+  transform: translateY(-3px);
+  color: black;
+  }
+  
+  .container__sign-up {
+  margin: 10px 0;
+  }
+ 
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.technologies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.tech-item {
+  flex-basis: calc(30% - 20px);
+  margin: 0 20px 20px 0;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+}
+
+.tech-item:nth-child(3n) {
+  margin-right: 0;
+}
+
+.tech-item h2 {
+  font-size: 24px;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.tech-item p {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+@media (max-width: 1000px) {
+  .tech-item {
+    flex-basis: 100%;
+  }
+} 
+  .container__sign-up-button {
+  background-color: #fff;
+  color: #333333;
+  border: 1px solid #333333;
+  padding: 10px 20px;
+  border-radius: 4px;
+  margin: 10px auto;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  display: block;
+  cursor: pointer;
+  }
+    </style>
+  <!-- CSS Files -->
+</head>
+<body class="">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none my-3 navbar-transparent mt-4">
+    <div class="container">
+      <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 text-white" href="../pages/dashboard.html">
+        Bug Tracking
+      </a>
+      <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon mt-2">
+          <span class="navbar-toggler-bar bar1"></span>
+          <span class="navbar-toggler-bar bar2"></span>
+          <span class="navbar-toggler-bar bar3"></span>
+        </span>
+      </button>
+      <div class="collapse navbar-collapse" id="navigation">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="{% url "dashboard" %}">
+              <i class="fa fa-chart-pie opacity-6  me-1"></i>
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link me-2" href="../pages/profile.html">
+              <i class="fa fa-user opacity-6  me-1"></i>
+              Profile
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link me-2" href="{% url "manager-register" %}">
+              <i class="fas fa-user-circle opacity-6  me-1"></i>
+              Sign Up
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link me-2" href="{% url "login" %}">
+              <i class="fas fa-key opacity-6  me-1"></i>
+              Sign In
+            </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav d-lg-block d-none">
+          <li class="nav-item">
+            <a href="https://www.creative-tim.com/product/argon-dashboard" class="btn btn-sm mb-0 me-1 bg-gradient-light">Free Download</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- End Navbar -->
+  <main class="main-content  mt-0">
+    <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('{% static './assets/img/technology.jpg' %}'); background-position: top;">
+      <span class="mask bg-gradient-dark opacity-6"></span>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-5 text-center mx-auto">
+            <h1 class="text-white mb-2 mt-5">Technology</h1>
+            <p class="text-lead text-white">Use these awesome technology to build or create new website in your project for Busiess.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row  mt-md-n11 mt-n10 justify-content-center">
+        <div class="col-xl-12 col-lg-8 col-md-7 mx-auto">
+          <div class="card z-index-0">
+            
+            <div class="container">
+              <div class="technologies">
+                <div class="tech-item">
+                  <h2>Python</h2>
+                  <p>Python is a high-level object oriented and procedural language. It is one of the easiest and the most reliable languages for scripting codes. Python is feature loaded with advantages of code portability....</p>
+                </div>
+                <div class="tech-item">
+                  <h2>Django</h2>
+                  <p>Django is a high-level & popular python programming framework that has an active and thriving community of developers, it is simple yet powerful and highly scalable.</p>
+                </div>
+                <div class="tech-item">
+                  <h2>Artificial Intelligence</h2>
+                  <p>Artificial intelligence is the human-like simulation of intelligence, it is trained to take certain defined actions and make predictions based on previously categorized data. Al comprises of ML and DL sciences.</p>
+                </div>
+                <div class="tech-item">
+                  <h2>Flutter</h2>
+                  <p>Flutter-crafted by google, flutter is an open-source UI software development kit based on dart programming language. it is one of the most popular cross-platform application development toolkit.</p>
+                </div>
+                <div class="tech-item">
+                  <h2>Golang</h2>
+                  <p>Golang or popularly knowns as go is one of the most dynamic programming language that gained popularity ever since it was made publicly available in the year 2012.</p>
+                </div>
+                <div class="tech-item">
+                  <h2>RPA</h2>
+                  <p>Today, automation is taking charge of the industries globally, it may, at first, seem like jobs of millions are in danger but fortunately it is the other way round. Though, as compared to other programming languages, go libraries</p>
+                </div>
+              </div>
+            </div>
+           
+            {% comment %} <div class="card-body">
+              
+              <form  method="POST"  enctype="multipart/form-data">  
+                {% csrf_token %}
+                    <div class="mb-3">
+                              <div class="form-control form-control-lg" for="id_username">
+                              {{form.username|as_crispy_field }}    
+                              </div>
+                    </div>
+                    <div class="mb-3">
+                                  <div class="form-control form-control-lg" for="id_email">
+                                  {{form.email|as_crispy_field }}    
+                                  </div>
+                    </div>
+                    <div class="mb-3">
+                                  <div class="form-control form-control-lg" for="id_userImage">
+                                  {{form.userImage|as_crispy_field }}    
+                                  </div>
+                   </div>
+                   <div class="mb-3">
+                      <div class="form-control form-control-lg" for="id_userImage">
+                        {{form.role|as_crispy_field }}    
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                                      <div class="form-control form-control-lg" for="id_password1">
+                                          {{form.password1|as_crispy_field}}
+                                      </div>
+                    </div>
+                    <div class="mb-3">
+                                          <div class="form-control form-control-lg" for="id_password2">
+                                              {{form.password2|as_crispy_field}}
+                                          </div>
+                    </div>
+                    <!-- <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" id="rememberMe">
+                      <label class="form-check-label" for="rememberMe">Remember me</label>
+                    </div> -->
+                    <div class="text-center">
+                                              <!-- <button type="button" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button> -->
+                                              <input type="submit" value="Register" class="btn btn-lg btn-dark btn-lg w-100 mt-4 mb-0">
+                    </div>
+              </form>
+            </div> {% endcomment %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
+  <footer class="footer py-5">
+    <div class="container">
+      <div class="row"> 
+        <div class="col-lg-8 mb-2 mx-auto text-center">
+          {% comment %} <a href="#" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+            Term
+          </a> {% endcomment %}
+          <a href="{% url "about" %}" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+            About Us
+          </a>
+          <a href="{% url "services" %}" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+            Services
+          </a>
+          <a href="{% url "technology" %}" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+            Technology
+          </a>
+          <a href="{% url "support" %}" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+            Support
+          </a>
+          <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+
+          </a>
+        </div>
+        <div class="col-lg-8 mx-auto text-center mb-4 mt-2">
+          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
+            <span class="text-lg fab fa-dribbble"><i class="fa fa-twitter-square" aria-hidden="true"></i></span>
+          </a>
+          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
+            {% comment %} <span class="text-lg fab fa-twitter"></span> {% endcomment %}
+            <i class="fa fa-twitter-square" aria-hidden="true"></i>
+          </a>
+          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
+            <span class="text-lg fab fa-instagram"></span>
+          </a>
+          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
+            <span class="text-lg fab fa-pinterest"></span>
+          </a>
+          <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
+            <span class="text-lg fab fa-github"></span>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-8 mx-auto text-center mt-1">
+          <p class="mb-0 text-secondary">
+            Copyright © <script>
+              document.write(new Date().getFullYear())
+            </script> Soft by Creative Tim.
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
+  <!--   Core JS Files   -->
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+</body>
+
+</html>
