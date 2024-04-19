@@ -3,7 +3,7 @@ from django.shortcuts import render,get_object_or_404
 from django.views.generic.edit import CreateView
 from django.views.generic import ListView,DeleteView,DetailView,UpdateView
 from .forms import ProjectCreationForm
-from .models import Project,ProjectTeam,Project_module,Task,UserTask
+from .models import Project,ProjectTeam,Project_module,Task
 from .forms import ProjectTeamCreationForm,ProjectModuleForm,ProjectTaskForm,UserTaskForm
 from django.core.mail import send_mail
 from django.conf import settings
@@ -21,6 +21,38 @@ class ProjectListView(ListView):
     template_name = 'project/list.html'
     model = Project
     context_object_name = 'projects'
+
+class ProjectDeleteView(DeleteView):
+    template_name = 'project/delete_project.html'
+    model = Project
+    success_url = '/project/list/'
+    context_object_name = 'projects'
+
+class ProjectDetailView(DetailView):
+    template_name = 'project/detail_project.html'
+    model = Project
+    context_object_name = 'projects'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        project_teams = ProjectTeam.objects.filter(project=self.object)
+        # project_task = Task.objects.filter(Project=self.object)
+        # project_module = Project_module.objects.filter(project=self.object)
+        context['project_teams'] = project_teams  # Add ProjectTeam data to the context
+        # context['project_task'] = project_task
+        # context['project_module'] = project_module
+        print("project : ",context['project_teams'])
+        # print("task : ",context['project_task'])
+        # print("module : ",context['project_module'])
+        return context
+    
+class ProjectUpdateView(UpdateView):
+    template_name = 'project/update_project.html'
+    form_class = ProjectCreationForm
+    model = Project
+    success_url = '/project/list/'
+    
+
 
 class ProjectTeamCreateView(CreateView):    
     template_name = 'project/create_team.html'
@@ -113,39 +145,6 @@ Manager
     #attach file
     #html
     return True
-
-class ProjectDeleteView(DeleteView):
-    template_name = 'project/delete_project.html'
-    model = Project
-    success_url = '/project/list/'
-    context_object_name = 'projects'
-
-class ProjectDetailView(DetailView):
-    template_name = 'project/detail_project.html'
-    model = Project
-    context_object_name = 'projects'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        project_teams = ProjectTeam.objects.filter(project=self.object)
-        # project_task = Task.objects.filter(Project=self.object)
-        # project_module = Project_module.objects.filter(project=self.object)
-        context['project_teams'] = project_teams  # Add ProjectTeam data to the context
-        # context['project_task'] = project_task
-        # context['project_module'] = project_module
-        print("project : ",context['project_teams'])
-        # print("task : ",context['project_task'])
-        # print("module : ",context['project_module'])
-        return context
-    
-class ProjectUpdateView(UpdateView):
-    template_name = 'project/update_project.html'
-    form_class = ProjectCreationForm
-    model = Project
-    success_url = '/project/list/'
-    
-
-
 
 # Project Module------------->
 class ProjectModuleView(CreateView):

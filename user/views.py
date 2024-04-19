@@ -42,8 +42,8 @@ class Home(CreateView):
     model = User
     fomr_class = ManagerRegistrationForm
 
-@method_decorator(login_required(login_url="/user/login/"), name='dispatch')
 
+@method_decorator(login_required(login_url="/user/login/"), name='dispatch')
 class ManagerRegisterView(CreateView):
     template_name = "user/manager_register.html"
     model = User
